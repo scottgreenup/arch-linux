@@ -71,6 +71,7 @@
       - jq
       - net-tools
       - nmap
+      - rsync
       - the_silver_searcher
       - tmux
       - tree
