@@ -68,6 +68,7 @@
       - encfs
       - fzf
       - gnupg
+      - imagemagick
       - jq
       - net-tools
       - nmap

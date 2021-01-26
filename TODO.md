@@ -16,3 +16,10 @@
 * Convert tabs to spaces in some work
 * firefox, xrandr, arandr, nvidia-settings
 * git config
+* wallpapers? LightDM/Desktop
+  * needed to add them to the /usr/share/lightdm/.../src/images/...
+* profile image
+* how do I configure a default image in Aether, use just one?
+* Lock screen?
+* audio
+
