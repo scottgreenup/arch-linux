@@ -1,0 +1,9 @@
+---
+- name: Configure Arch Linux 
+  hosts: all
+
+  roles:
+  - maintenance
+  - shell
+  - nvim
+  - crypto

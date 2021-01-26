@@ -1,0 +1,5 @@
+---
+- name: Generate an ED25519 key without password (you can add one)
+  command : ssh-keygen -q -t ed25519 -f '~/.ssh/id_ed25519' -C '' -N ''
+  args:
+    creates: '~/.ssh/id_ed25519'

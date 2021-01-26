@@ -1,0 +1,14 @@
+---
+
+# Neovim is our editor.
+- name: install neovim
+  become: true
+  community.general.pacman:
+    name:
+    - neovim
+    state: present
+
+- name: copy init.vim to config
+  copy:
+    src: init.vim
+    dest: '~/.config/nvim/init.vim'

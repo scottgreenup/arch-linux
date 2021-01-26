@@ -1,0 +1,104 @@
+---
+
+# Zsh is our shell.
+# TODO move to separate role
+- name: install shell pre-requisites
+  become: true
+  community.general.pacman:
+    name:
+    - git
+    - ttf-fantasque-sans-mono
+    - zsh
+    state: present
+
+- name: change shell to zsh
+  become: true
+  user:
+    name: '{{ ansible_user_id }}'
+    shell: /bin/zsh
+
+- name: create oh-my-zsh directory
+  file:
+    path: '~/.config/zsh/oh-my-zsh'
+    state: directory
+
+- name: git clone oh-my-zsh
+  git:
+    depth: 1
+    dest: '~/.config/zsh/oh-my-zsh'
+    repo: 'https://github.com/ohmyzsh/ohmyzsh'
+    version: 'origin/master'
+
+- name: copy zshrc to homedir
+  copy:
+    src: zshrc
+    dest: '~/.zshrc'
+
+# Kitty is our terminal emulator.
+# TODO move to separate role
+- name: install shell pre-requisites
+  become: true
+  community.general.pacman:
+    name:
+    - kitty
+    state: present
+
+- name: setup kitty config directory
+  file:
+    path: '~/.config/kitty'
+    state: directory
+
+- name: setup kitty
+  copy:
+    src: kitty.conf
+    dest: '~/.config/kitty/kitty.conf'
+
+
+# These are utilities that are purely pipable friends. Don't put languages or
+# editors in here. Vim, python, go and others should all have their own roles.
+# TODO move xclip to xorg stuff
+- name: install useful CLI utilities
+  become: true
+  community.general.pacman:
+    name:
+      - bat
+      - bashtop
+      - bind-tools
+      - curl
+      - encfs
+      - fzf
+      - gnupg
+      - jq
+      - net-tools
+      - nmap
+      - rsync
+      - the_silver_searcher
+      - tmux
+      - tree
+      - unzip
+      - wget
+      - xclip
+      - yq
+    state: present
+
+# TMUX
+- name: copy tmux.conf to homedir
+  copy:
+    src: tmux.conf
+    dest: '~/.tmux.conf'
+
+# Flatpak
+- name: install Flatpak
+  become: true
+  community.general.pacman:
+    name:
+      - flatpak
+    state: present
+
+# Autojump is useful, it _is_ on the AUR... but the AUR is not to be trusted.
+#- name: git clone autojump
+#  git:
+#    depth: 1
+#    dest: '~/code/github.com/wting/autojump'
+#    repo: 'https://github.com/wting/autojump'
+#    version: 'release-v22.5.3'

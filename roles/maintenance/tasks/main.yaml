@@ -1,0 +1,10 @@
+---
+- name: update cache and upgrade current packages
+  become: true
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+  register: _packages
+
+- debug:
+    var: _packages
