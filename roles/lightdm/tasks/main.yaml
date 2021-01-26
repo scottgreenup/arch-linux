@@ -1,0 +1,47 @@
+---
+
+# LightDM is our display manager.
+# https://wiki.archlinux.org/index.php/LightDM
+
+- name: install lightdm packages
+  become: true
+  community.general.pacman:
+    name:
+    - lightdm
+    - lightdm-webkit2-greeter
+    state: present
+
+- name: ensure lightdm theme directory exists
+  become: true
+  file:
+    path: '/usr/share/lightdm-webkit/themes/lightdm-webkit-theme-aether'
+    state: directory
+
+# https://github.com/NoiSek/Aether/releases/tag/v2.2.2
+# Be aware of bug: https://github.com/ansible/ansible/issues/29657
+- name: unpack Aether (lightdm theme)
+  become: true
+  unarchive:
+    src: 'Aether-2.2.2.tar.gz'
+    dest: '/usr/share/lightdm-webkit/themes/lightdm-webkit-theme-aether'
+    extra_opts: [--strip-components=1]
+    # We add 'creates' to give it some idempotency.
+    creates: '/usr/share/lightdm-webkit/themes/lightdm-webkit-theme-aether/index.html'
+
+- name: copy lightdm.conf
+  become: true
+  copy:
+    src: lightdm.conf
+    dest: '/etc/lightdm/lightdm.conf'
+
+- name: copy lightdm-webkit2-greeter.conf
+  become: true
+  copy:
+    src: lightdm-webkit2-greeter.conf
+    dest: '/etc/lightdm/lightdm-webkit2-greeter.conf'
+
+- name: enable lightdm service
+  become: true
+  systemd:
+    enabled: true
+    name: lightdm
