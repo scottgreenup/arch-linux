@@ -87,6 +87,14 @@
     src: tmux.conf
     dest: '~/.tmux.conf'
 
+# Flatpak
+- name: install Flatpak
+  become: true
+  community.general.pacman:
+    name:
+      - flatpak
+    state: present
+
 # Autojump is useful, it _is_ on the AUR... but the AUR is not to be trusted.
 #- name: git clone autojump
 #  git:
