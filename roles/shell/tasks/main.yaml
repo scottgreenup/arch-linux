@@ -56,6 +56,7 @@
 
 # These are utilities that are purely pipable friends. Don't put languages or
 # editors in here. Vim, python, go and others should all have their own roles.
+# TODO move xclip to xorg stuff
 - name: install useful CLI utilities
   become: true
   community.general.pacman:
@@ -75,6 +76,7 @@
       - tree
       - unzip
       - wget
+      - xclip
       - yq
     state: present
 
