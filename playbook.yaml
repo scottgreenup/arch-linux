@@ -3,8 +3,10 @@
   hosts: all
 
   roles:
-  - maintenance
-  - shell
-  - nvim
-  - crypto
-  - lightdm
+    - maintenance
+    - shell
+    - nvim
+    - crypto
+    - lightdm
+    - networking
+    - 1password

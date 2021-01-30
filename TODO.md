@@ -22,4 +22,7 @@
 * how do I configure a default image in Aether, use just one?
 * Lock screen?
 * audio
+* GPG module that we can trust? Maybe https://github.com/netson/ansible-gpg-key?
+* Copy paste doesn't work with TMUX+KITTY
 
+* VPN is manual at the moment.

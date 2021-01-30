@@ -1,0 +1,32 @@
+---
+
+# Thank you https://github.com/cjsteel/ansible-role-gpg/blob/master/tasks/gen.yml
+- name: check 1password signing key
+  command:
+    cmd: gpg --list-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
+  ignore_errors: true
+  register: gpg_1password_key
+
+- name: trust 1password signing key
+  command:
+    cmd: gpg --keyserver keyserver.ubuntu.com --recv-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
+  when: gpg_1password_key.stdout == ""
+
+# AUR...
+- name: git clone aur.archlinux.org/1password
+  git:
+    depth: 1
+    dest: '~/code/aur.archlinux.org/1password'
+    repo: 'https://aur.archlinux.org/1password.git'
+    version: 'HEAD'
+
+- name: install base-devel
+  become: true
+  community.general.pacman:
+    name:
+    - base-devel
+
+- name: makepkg on 1password
+  command:
+    chdir: '~/code/aur.archlinux.org/1password'
+    cmd: makepkg --syncdeps --install --verifysource --noconfirm

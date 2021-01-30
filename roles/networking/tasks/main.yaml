@@ -1,0 +1,21 @@
+---
+- name: install network manager
+  become: true
+  community.general.pacman:
+    name:
+    - networkmanager
+    - network-manager-applet
+    - networkmanager-openvpn
+    state: present
+
+- name: enable network manager service
+  become: true
+  systemd:
+    enabled: true
+    name: NetworkManager
+
+- name: enable resolved
+  become: true
+  systemd:
+    enabled: true
+    name: systemd-resolved

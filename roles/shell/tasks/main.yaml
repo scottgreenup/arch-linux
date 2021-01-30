@@ -61,25 +61,25 @@
   become: true
   community.general.pacman:
     name:
-      - bat
-      - bashtop
-      - bind-tools
-      - curl
-      - encfs
-      - fzf
-      - gnupg
-      - imagemagick
-      - jq
-      - net-tools
-      - nmap
-      - rsync
-      - the_silver_searcher
-      - tmux
-      - tree
-      - unzip
-      - wget
-      - xclip
-      - yq
+    - bat
+    - bashtop
+    - bind-tools
+    - curl
+    - encfs
+    - fzf
+    - gnupg
+    - imagemagick
+    - jq
+    - net-tools
+    - nmap
+    - rsync
+    - the_silver_searcher
+    - tmux
+    - tree
+    - unzip
+    - wget
+    - xclip
+    - yq
     state: present
 
 # TMUX
