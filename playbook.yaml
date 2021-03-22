@@ -8,5 +8,7 @@
     - nvim
     - crypto
     - lightdm
+    - awesomewm
     - networking
     - 1password
+    - sound
