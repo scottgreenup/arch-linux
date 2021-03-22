@@ -1,0 +1,17 @@
+---
+
+- name: install useful CLI utilities
+  become: true
+  community.general.pacman:
+    name:
+      - pavucontrol
+      - pulseaudio
+      - pulseaudio-alsa
+    state: present
+
+- name: enable network manager service
+  systemd:
+    scope: user
+    enabled: true
+    name: pulseaudio
+    state: started
