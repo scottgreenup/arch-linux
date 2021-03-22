@@ -1,0 +1,27 @@
+---
+
+- name: install awesome
+  become: true
+  community.general.pacman:
+    name:
+    - awesome
+    state: present
+
+- name: create awesome directory
+  file:
+    path: '~/.config/awesome'
+    state: directory
+
+- name: copy awesome rc.lua
+  copy:
+    src: rc.lua
+    dest: '~/.config/awesome/rc.lua'
+
+- name: install GUI utilities
+  become: true
+  community.general.pacman:
+    name:
+    - feh
+    - vlc
+    state: present
+
